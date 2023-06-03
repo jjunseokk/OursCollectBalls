@@ -7,13 +7,18 @@ const port = 5000;
 
 require('dotenv').config();
 
+const app = express();
+app.use(express.json());
+app.use(cors());
+
 const connection = mysql.createConnection({
-    host: 'ls-73437f1140087ff57815f637d3fad565a1b67dd9.ct49gfaignpb.ap-northeast-2.rds.amazonaws.com',
+    host: process.env.MYSQL_HOST,
     port: 3306,
-    user: 'dbmasteruser',
-    password: 'tH}Gl|ePw([l1DI(a-Ve[9oQ.V|l%eTz',
+    user: process.env.MYSQL_USERNAME,
+    password: process.env.MYSQL_PASSWORD,
     database: 'ours',
 });
+
 
 connection.connect((error) => {
     if (error) {
@@ -25,9 +30,7 @@ connection.connect((error) => {
     });
 });
 
-const app = express();
-app.use(express.json());
-app.use(cors());
+
 
 
 app.use(express.static(path.join(__dirname, "build")));
