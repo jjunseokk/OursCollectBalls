@@ -49,6 +49,9 @@ const ShopSearch = () => {
     // 지역과 매장명에 따라 필터링된 항목들을 반환하는 함수
     const filterItems = (items) => {
         const combinedSearchTerm = searchTerm.toLowerCase();
+        if (!items) {
+            return []; // 예외 처리: items가 undefined인 경우 빈 배열 반환
+        }
         return items.filter((item) => {
             const combinedItemData = ` ${item.com_code_store_name} ${item.com_address1} ${item.hphone}`.toLowerCase();
             return (
@@ -314,7 +317,7 @@ const ShopSearch = () => {
                             const currentIndex = (currentPage - 1) * itemsPerPage + index;
                             return (
                                 <tr key={`${item.com_code_store_name}-${index}`}>
-                                    <td>{currentIndex+1}</td>
+                                    <td>{currentIndex + 1}</td>
                                     <td>{item.com_code_store_name}</td>
                                     <td>{item.com_address1}</td>
                                     {/* <td>{item.hphone ? item.hphone : "번호없음"}</td> */}

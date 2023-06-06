@@ -116,13 +116,9 @@ app.post('/qving', (req, res) => {
     UNION
     SELECT * FROM tbl_ours_store`;
 
-    // const query = `SELECT a.* FROM tbl_com_code_store a INNER JOIN tbl_machine_master b ON b.com_code_store_num = a.num AND b.mac_type IN ('QB','QK') WHERE 1=1
-    // UNION
-    // SELECT * FROM tbl_ours_store`;
-
     connection.query(query, (error, result) => {
         if (error) {
-            console.error('delete 쿼리 오류:::', error);
+            console.error('qving 접근::', error);
         }
 
         res.json({ data: result });
